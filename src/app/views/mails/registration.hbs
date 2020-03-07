@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmação de Cadastro</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet" />
+  <!-- <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap"
+      rel="stylesheet"
+    /> -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      outline: 0;
+      box-sizing: border-box;
+      list-style: none;
+      text-decoration: none;
+    }
+
+    *:focus {
+      outline: 0;
+    }
+
+    html,
+    body,
+    #root {
+      /* height: 100%; */
+      font-family: 'Open Sans', 'Ubuntu', 'Roboto', sans-serif !important;
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      background: #f1f4f9;
+    }
+
+    body,
+    input,
+    button {
+      font: 14px 'Open Sans', 'Ubuntu', 'Roboto', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      background-color: #fff;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faixa-bg {
+      width: 100%;
+      background-color: #2687e9;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .faixa-bg h1 {
+      text-align: center;
+      color: #fff;
+    }
+
+    .logo {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 32px;
+    }
+
+    .content>h2 {
+      text-align: center;
+      color: #2687e9;
+      font-size: 32px;
+      padding: 10px 32px 32px;
+    }
+
+    .content p {
+      text-align: center;
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 32px;
+      padding: 0 32px;
+      line-height: 1.8rem;
+    }
+
+    .btn {
+      padding: 12px 15px;
+      background: #fff;
+      border: 1px solid #2687e9;
+      color: #2687e9;
+      border-radius: 4px;
+      margin-bottom: 32px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn:hover {
+      background: #2687e9;
+      border: 1px solid #2687e9;
+      color: #fff;
+    }
+
+    .font-bold {
+      font-weight: bold;
+    }
+
+    .destaque {
+      font-size: 24px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="logo">
+      <img width="130" src="https://laraworks.s3-sa-east-1.amazonaws.com/logo-header.png" />
+    </div>
+    <div class="faixa-bg">
+      <h1>
+        Confirmação de Cadastro
+      </h1>
+    </div>
+    <div class="content">
+      <h2>Seja bem-vindo(a), {{ name }}!</h2>
+      <p class="font-bold destaque">Vamos confirmar seu cadastro?</p>
+      <p>
+        É importante confirmar seu cadastro para ativar as notificações. Assim
+        podemos enviar a você avisos e muito mais.
+      </p>
+      <a href="{{link}}" target="_blank" class="btn">
+        CLIQUE AQUI PARA CONFIRMAR
+      </a>
+      <p>Abraços, <br />Equipe Larawork</p>
+    </div>
+  </div>
+</body>
+
+</html>

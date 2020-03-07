@@ -1,0 +1,51 @@
+version: '3'
+
+networks:
+  lw-network:
+    driver: bridge
+
+services:
+  postgres:
+    container_name: lw-postgres
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    volumes:
+      - ../docker/volumes/storage/postgres:/var/lib/postgresql/data
+    ports:
+      - '${DB_PORT}:5432'
+    networks:
+      - lw-network
+
+  mongo:
+    image: bitnami/mongodb:4.2.3
+    container_name: lw-mongo
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - MONGODB_ROOT_PASSWORD=${MONGO_PASS_ROOT}
+      - MONGODB_USERNAME=${MONGO_USER}
+      - MONGODB_PASSWORD=${MONGO_PASS}
+      - MONGODB_DATABASE=${MONGO_DATABASE}
+    volumes:
+      - ../docker/volumes/storage/mongo:/bitnami/mongodb/data
+    ports:
+      - '${MONGO_PORT}:27017'
+    networks:
+      - lw-network
+
+  redis:
+    image: bitnami/redis:4.0.14
+    container_name: lw-redis
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    volumes:
+      - ../docker/volumes/storage/redis:/bitnami/redis/data
+    ports:
+      - '${REDIS_PORT}:6379'
+    networks:
+      - lw-network
