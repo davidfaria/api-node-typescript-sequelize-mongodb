@@ -3,6 +3,8 @@ import RegisterService from '@services/RegisterService';
 
 class RegisterController {
   async store(req: Request, res: Response) {
+    // console.log('Aqui');
+
     const { name, email, password, link } = req.body;
 
     const user = await RegisterService.create({

@@ -9,6 +9,10 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'prettier',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
   ],
   globals: {
     Atomics: 'readonly',
@@ -20,13 +24,19 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
     'no-underscore-dangle': 'off',
+    'no-param-reassign': 'off',
     'class-methods-use-this': 'off',
     'no-await-in-loop': 'off',
+    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+    camelcase: 'off',
     'import/prefer-default-export': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -36,9 +46,7 @@ module.exports = {
     ],
     'import/no-extraneous-dependencies': [
       'error',
-      {
-        devDependencies: ['**/*.spec.ts', 'src/utils/tests/*.ts'],
-      },
+      { devDependencies: ['**/*.test.ts', '**/*.spec.ts', 'jest.config.js'] },
     ],
   },
   overrides: [

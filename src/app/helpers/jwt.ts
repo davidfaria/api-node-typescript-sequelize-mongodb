@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import authConfig from '../../config/auth';
 
-const generateJwtToken = ({ ...data }: any):string => {
+const generateJwtToken = ({ ...data }: object) => {
   const token = jwt.sign({ ...data }, authConfig.secret, {
     expiresIn: authConfig.expiresIn,
   });

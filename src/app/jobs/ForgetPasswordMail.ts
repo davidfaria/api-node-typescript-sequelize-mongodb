@@ -1,6 +1,7 @@
 import Mail from '@lib/Mail';
+import JobMail from '@jobs/JobMail';
 
-class ForgetPasswordMail {
+class ForgetPasswordMail implements JobMail {
   get key() {
     return 'ForgetPasswordMail';
   }

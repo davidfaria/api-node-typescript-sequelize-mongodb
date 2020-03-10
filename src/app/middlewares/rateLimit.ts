@@ -2,6 +2,7 @@ import rateLimit from 'express-rate-limit';
 
 // Obs. outra opção legal para trabalhar em conjunto com o express-rate-limit é
 // express-slow-down
+//
 
 const limiter = rateLimit({
   // windowMs: 1 * 60 * 1000, // (ms)  1 minutes

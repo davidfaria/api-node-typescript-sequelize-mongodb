@@ -1,5 +1,4 @@
-import { Model, DataTypes } from 'sequelize';
-import database from '@config/database';
+import { Model, DataTypes, Sequelize } from 'sequelize';
 import { uuid } from '@helpers/hash';
 
 class File extends Model {
@@ -11,38 +10,40 @@ class File extends Model {
   // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
-}
 
-File.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      allowNull: false,
-      defaultValue: uuid(),
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    path: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    url: {
-      type: DataTypes.VIRTUAL,
-      get() {
-        return `${process.env.APP_URL_FILE}/files/${this.path}`;
+  static initialize(sequelize: Sequelize) {
+    this.init(
+      {
+        id: {
+          type: DataTypes.UUID,
+          primaryKey: true,
+          allowNull: false,
+          defaultValue: uuid(),
+        },
+        name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        path: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        url: {
+          type: DataTypes.VIRTUAL,
+          get() {
+            return `${process.env.APP_URL_FILE}/files/${this.path}`;
+          },
+        },
       },
-    },
-  },
-  {
-    tableName: 'files',
-    sequelize: database,
-  }
-);
+      {
+        tableName: 'files',
+        sequelize,
+      },
+    );
 
-File.sync({ force: false }).then(() => console.log('File table created'));
+    return this;
+  }
+}
 
 export default File;

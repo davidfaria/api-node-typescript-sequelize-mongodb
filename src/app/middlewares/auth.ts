@@ -1,11 +1,10 @@
-import { Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 import authConfig from '@config/auth';
-import IUserAuthRequest from '@interfaces/IUserAuthRequest';
 
 export default async (
-  req: IUserAuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {

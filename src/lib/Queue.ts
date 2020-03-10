@@ -24,7 +24,7 @@ class Queue {
     });
   }
 
-  add(queue, job) {
+  add(queue: string, job: any) {
     return this.queues[queue].bee.createJob(job).save();
   }
 
@@ -35,7 +35,7 @@ class Queue {
     });
   }
 
-  handleFailure(job, err) {
+  handleFailure(job: any, err: any) {
     console.error(`Queue ${job.queue.name}: FAILED`, err);
   }
 }

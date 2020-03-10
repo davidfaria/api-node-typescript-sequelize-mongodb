@@ -36,8 +36,14 @@ class RegisterService {
       password,
     });
 
+    /**
+     *  Adiciona na fila o email de confirmação de cadastro
+     */
     Queue.add(RegistrationMail.key, { dataMail: { name, email, link } });
 
+    /**
+     *  Registr log send mail noSql (MONGODB)
+     */
     Mail.create({
       flag: 'RegistrationMail',
       from: process.env.MAIL_FROM,

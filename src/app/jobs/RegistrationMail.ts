@@ -1,7 +1,8 @@
 import Mail from '@lib/Mail';
+import JobMail from '@jobs/JobMail';
 
-class RegistrationMail {
-  get key() {
+class RegistrationMail implements JobMail {
+  get key(): string {
     return 'RegistrationMail';
   }
 

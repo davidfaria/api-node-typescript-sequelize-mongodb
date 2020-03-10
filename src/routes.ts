@@ -10,6 +10,7 @@ import multerConfig from '@config/multer';
  *  Middleware
  */
 import authMiddleware from '@middlewares/auth';
+import aclCan from '@middlewares/acl/can';
 
 /**
  * Controller
@@ -46,7 +47,6 @@ routes.get('/', (req, res) => {
 });
 
 routes.post('/sessions', SessionValidator, SessionController.store);
-routes.post('/sessions', SessionValidator, SessionController.store);
 routes.post('/register', RegisterValidator, RegisterController.store);
 routes.post('/confirmEmail', ConfirmEmailController.store);
 
@@ -54,10 +54,11 @@ routes.post('/forget', ForgetValidator, ForgetController.store);
 routes.put(
   '/forgetResetPassword',
   ForgetResetPasswordValidator,
-  ForgetController.update
+  ForgetController.update,
 );
 
-routes.get('/users', UserController.index);
+routes.use(authMiddleware);
+routes.get('/users', aclCan('users_list'), UserController.index);
 routes.post('/users', UserStoreValidator, UserController.store);
 routes.put('/users/:id', UserUpdateValidator, UserController.update);
 routes.delete('/users/:id', UserController.destroy);

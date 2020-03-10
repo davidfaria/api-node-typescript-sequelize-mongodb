@@ -1,4 +1,4 @@
-import nodemailer, { Transport } from 'nodemailer';
+import nodemailer from 'nodemailer';
 import { resolve } from 'path';
 import exphbs from 'express-handlebars';
 import nodemailerhbs from 'nodemailer-express-handlebars';
@@ -18,7 +18,7 @@ import mailConfig from '@config/mail';
 // }
 
 class Mail {
-  private transporter: Transport;
+  private transporter: any;
   constructor() {
     const { host, port, secure, auth } = mailConfig;
     this.transporter = nodemailer.createTransport({

@@ -6,8 +6,9 @@ export default async (req, res, next) => {
       name: Yup.string().required(),
       password: Yup.string(),
       password_confirmation: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
+        password ? field.required().oneOf([Yup.ref('password')]) : field,
       ),
+      avatar_id: Yup.string(),
     });
 
     await schema.validate(req.body, { abortEarly: false });

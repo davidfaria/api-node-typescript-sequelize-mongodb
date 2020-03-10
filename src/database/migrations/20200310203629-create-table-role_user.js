@@ -8,24 +8,25 @@ module.exports = {
 
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
-      */
-    return queryInterface.createTable('users', {
+    */
+    return queryInterface.createTable('role_user', {
       id: {
-        type: DataTypes.UUID,
+        type: Sequelize.DataTypes.UUID,
         primaryKey: true,
         allowNull: false,
       },
-      name: {
-        type: Sequelize.STRING,
+      permission_id: {
+        type: Sequelize.DataTypes.UUID,
+        references: { model: 'roles', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
+      user_id: {
+        type: Sequelize.DataTypes.UUID,
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         allowNull: false,
       },
       created_at: {
@@ -47,6 +48,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
       */
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('role_user');
   },
 };

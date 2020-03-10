@@ -3,3 +3,6 @@ tmp
 logs
 dist
 .env
+.env.test
+docker
+__tests__/coverage

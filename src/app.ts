@@ -2,12 +2,12 @@ import './bootstrap';
 import path from 'path';
 import express, { Application } from 'express';
 import helmet from 'helmet';
-
 import cors from '@middlewares/cors';
 import rateLimit from '@middlewares/rateLimit';
 
-import database from './database';
-import ROUTES from './routes';
+import ROUTES from '@app/routes';
+
+import database from '@app/database';
 
 class App {
   public server: Application;
@@ -27,7 +27,7 @@ class App {
 
     this.server.use(
       '/files',
-      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')),
     );
   }
 

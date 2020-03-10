@@ -1,25 +1,16 @@
 import '../bootstrap';
-import { Sequelize } from 'sequelize';
+import { Options, Dialect } from 'sequelize';
 
-const database = new Sequelize({
-  dialect: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'docker',
-  database: 'larawork',
-  logging: false,
-  storage: './__tests__/database.sqlite',
+export const databaseConfig: Options = {
+  dialect: process.env.DB_DIALECT as Dialect,
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
   define: {
     timestamps: true,
     underscored: true,
   },
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
-  },
-});
-
-export default database;
+  storage: './__tests__/database.sqlite',
+  logging: false,
+};
