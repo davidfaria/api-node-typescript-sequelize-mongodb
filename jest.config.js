@@ -23,7 +23,7 @@ module.exports = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ['src/app/**/*/.ts'],
+  collectCoverageFrom: ['<rootDir>/src/app/**/*/.ts'],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: '__tests__/coverage',
@@ -86,7 +86,7 @@ module.exports = {
   }),
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
-  // modulePathIgnorePatterns: [],
+  modulePathIgnorePatterns: ['<rootDir>/docker/', '<rootDir>/dist/'],
 
   // Activates notifications for test results
   // notify: false,
@@ -187,4 +187,10 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+  testTimeout: 500,
+  globals: {
+    'ts-jest': {
+      isolatedModules: true,
+    },
+  },
 };

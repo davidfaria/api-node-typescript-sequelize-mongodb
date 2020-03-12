@@ -9,14 +9,14 @@ const randomHash = (length: number = 30): string => {
 
 const generateBcryptHash = async (
   password: string,
-  length: number = 8
+  length: number = 8,
 ): Promise<string> => {
   return await bcrypt.hash(password, length);
 };
 
 const compareBcryptHash = async (
   password: string,
-  passsword_hash: string
+  passsword_hash: string = '',
 ): Promise<boolean> => {
   return await bcrypt.compare(password, passsword_hash);
 };

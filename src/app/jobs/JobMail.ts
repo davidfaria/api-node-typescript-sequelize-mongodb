@@ -1,4 +1,4 @@
 export default interface JobMail {
-  key(): string;
+  key: string;
   handle({ data }: any): void;
 }

@@ -17,23 +17,24 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       await queryInterface.createTable(
-        'permission_role',
+        'role_permissions',
         {
           id: {
-            type: Sequelize.DataTypes.UUID,
-            primaryKey: true,
+            type: Sequelize.INTEGER,
             allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
           },
-          permission_id: {
-            type: Sequelize.DataTypes.UUID,
-            references: { model: 'permissions', key: 'id' },
+          role_id: {
+            type: Sequelize.INTEGER,
+            references: { model: 'roles', key: 'id' },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
             allowNull: false,
           },
-          role_id: {
-            type: Sequelize.DataTypes.UUID,
-            references: { model: 'roles', key: 'id' },
+          permission_id: {
+            type: Sequelize.INTEGER,
+            references: { model: 'permissions', key: 'id' },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
             allowNull: false,
@@ -51,7 +52,7 @@ module.exports = {
       );
 
       await queryInterface.addIndex(
-        'permission_role',
+        'role_permissions',
         ['permission_id', 'role_id'],
         { transaction, unique: true },
       );
@@ -71,6 +72,6 @@ module.exports = {
       return queryInterface.dropTable('users');
       */
 
-    return queryInterface.dropTable('permission_role');
+    return queryInterface.dropTable('role_permissions');
   },
 };

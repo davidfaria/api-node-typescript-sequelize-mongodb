@@ -1,5 +1,4 @@
 'use strict';
-import { v4 as uuid } from 'uuid';
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -17,7 +16,6 @@ module.exports = {
       'roles',
       [
         {
-          id: uuid(),
           slug: 'administrador',
           name: 'administrador',
           description: 'Administrador',
@@ -25,7 +23,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'gerente',
           name: 'gerente',
           description: 'Gerente',
@@ -33,7 +30,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'supervisor',
           name: 'supervisor',
           description: 'Supervisor',
@@ -41,7 +37,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'estoque',
           name: 'estoque',
           description: 'Estoque',
@@ -49,7 +44,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'caixa',
           name: 'caixa',
           description: 'Caixa',
@@ -57,7 +51,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'vendedor',
           name: 'vendedor',
           description: 'Vendedor',

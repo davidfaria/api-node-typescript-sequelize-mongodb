@@ -1,5 +1,5 @@
 'use strict';
-import { v4 as uuid } from 'uuid';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     /*
@@ -16,7 +16,6 @@ module.exports = {
       'permissions',
       [
         {
-          id: uuid(),
           slug: 'users_list',
           name: 'Listar usuários',
           description: 'Permite Listar os usuários Cadastrados',
@@ -24,7 +23,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'users_create',
           name: 'Criar usuário',
           description: 'Permite criar novos usuários',
@@ -32,7 +30,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'users_update',
           name: 'Atualizar usuário',
           description: 'Permite atualizar dados do usuario',
@@ -40,7 +37,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuid(),
           slug: 'users_delete',
           name: 'Deletar usuário',
           description: 'Permite remover usuário',

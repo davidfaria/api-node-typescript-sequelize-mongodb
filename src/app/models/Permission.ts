@@ -1,11 +1,11 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
 import { uuid } from '@helpers/hash';
 
-class File extends Model {
-  public id!: number;
+class Permission extends Model {
+  public id!: string;
+  public slug!: string;
   public name!: string;
-  public path!: string;
-  public readonly url?: string;
+  public description!: string;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -20,24 +20,22 @@ class File extends Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        name: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        path: {
+        slug: {
           type: DataTypes.STRING,
           allowNull: false,
           unique: true,
         },
-        url: {
-          type: DataTypes.VIRTUAL,
-          get() {
-            return `${process.env.APP_URL_FILE}/files/`;
-          },
+        name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        description: {
+          type: DataTypes.TEXT,
+          allowNull: false,
         },
       },
       {
-        tableName: 'files',
+        tableName: 'permissions',
         sequelize,
       },
     );
@@ -46,4 +44,4 @@ class File extends Model {
   }
 }
 
-export default File;
+export default Permission;

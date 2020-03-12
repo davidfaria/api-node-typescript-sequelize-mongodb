@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
 import User from '@models/User';
-import File from '@models/File';
+// import File from '@models/File';
+// import Role from '@models/Role';
 import { compareBcryptHash, generateBcryptHash } from '@helpers/hash';
 import { generateJwtToken } from '@helpers/jwt';
 
@@ -13,11 +14,33 @@ class SessionController {
       where: { email },
       include: [
         {
-          model: File,
-          as: 'avatar',
+          association: 'avatar',
           attributes: ['id', 'path', 'url'],
         },
+        {
+          association: 'roles',
+          through: { attributes: [] },
+          attributes: ['id', 'slug'],
+        },
+        {
+          association: 'permissions',
+          through: { attributes: [] },
+          attributes: ['id', 'slug'],
+        },
       ],
+      // include: [
+      //   {
+      //     model: File,
+      //     as: 'avatar',
+      //     attributes: ['id', 'path', 'url'],
+      //   },
+      //   {
+      //     model: Role,
+      //     as: 'roles',
+      //     through: { attributes: [] },
+      //     attributes: ['id', 'slug'],
+      //   },
+      // ],
     });
 
     if (!user) return res.status(401).json({ error: 'User not found' });
@@ -29,13 +52,16 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name } = user;
+    const { id, name, avatar, roles, permissions } = user;
 
     return res.json({
       user: {
         id,
         name,
         email,
+        avatar,
+        roles,
+        permissions,
       },
       token: generateJwtToken({ id }),
     });

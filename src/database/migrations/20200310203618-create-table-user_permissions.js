@@ -13,23 +13,24 @@ module.exports = {
 
     try {
       await queryInterface.createTable(
-        'permission_user',
+        'user_permissions',
         {
           id: {
-            type: Sequelize.DataTypes.UUID,
-            primaryKey: true,
+            type: Sequelize.INTEGER,
             allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
           },
-          permission_id: {
-            type: Sequelize.DataTypes.UUID,
-            references: { model: 'permissions', key: 'id' },
+          user_id: {
+            type: Sequelize.INTEGER,
+            references: { model: 'users', key: 'id' },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
             allowNull: false,
           },
-          user_id: {
-            type: Sequelize.DataTypes.UUID,
-            references: { model: 'users', key: 'id' },
+          permission_id: {
+            type: Sequelize.INTEGER,
+            references: { model: 'permissions', key: 'id' },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
             allowNull: false,
@@ -47,7 +48,7 @@ module.exports = {
       );
 
       await queryInterface.addIndex(
-        'permission_user',
+        'user_permissions',
         ['permission_id', 'user_id'],
         { transaction, unique: true },
       );
@@ -66,6 +67,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
       */
-    return queryInterface.dropTable('permission_user');
+    return queryInterface.dropTable('user_permissions');
   },
 };

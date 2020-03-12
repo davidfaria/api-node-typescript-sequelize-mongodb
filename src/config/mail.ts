@@ -1,15 +1,19 @@
+const host: string = <any>process.env.MAIL_HOST;
+const port: string = <any>process.env.MAIL_PORT;
+const secure: string = <any>process.env.MAIL_SECURE;
+const user: string = <any>process.env.MAIL_USER;
+const pass: string = <any>process.env.MAIL_PASS;
+const from: string = <any>process.env.MAIL_FROM;
+
 export default {
-  host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT,
-  secure: process.env.MAIL_SECURE,
+  host,
+  port,
+  secure,
   auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
+    user,
+    pass,
   },
   default: {
-    from: process.env.MAIL_FROM,
+    from,
   },
 };
-
-// Amazon SES
-// Mailtrap (DEV)

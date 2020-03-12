@@ -35,21 +35,22 @@ class UserController {
   }
 
   async update(req: Request, res: Response): Promise<Response> {
-    const { name, password, avatar_id } = req.body;
-    const user = await User.findByPk(req.userId);
+    return res.json({ ok: 'true' });
+    // const { name, password, avatar_id } = req.body;
+    // const user = await User.findByPk(req.userId);
 
-    if (!user) return res.status(400).json({ error: 'User not found' });
+    // if (!user) return res.status(400).json({ error: 'User not found' });
 
-    user.name = name;
-    user.password = password;
-    user.avatar_id = avatar_id;
-    await user.save();
+    // user.name = name;
+    // user.password = password;
+    // user.avatar_id = avatar_id;
+    // await user.save();
 
-    return res.json({
-      id: user.id,
-      name,
-      email: user.email,
-    });
+    // return res.json({
+    //   id: user.id,
+    //   name,
+    //   email: user.email,
+    // });
   }
 
   async destroy(req: Request, res: Response): Promise<Response> {

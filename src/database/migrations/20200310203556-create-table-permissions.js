@@ -11,21 +11,22 @@ module.exports = {
     */
     return queryInterface.createTable('permissions', {
       id: {
-        type: Sequelize.DataTypes.UUID,
-        primaryKey: true,
+        type: Sequelize.INTEGER,
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
       },
       slug: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
       name: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       description: {
-        type: Sequelize.DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       created_at: {

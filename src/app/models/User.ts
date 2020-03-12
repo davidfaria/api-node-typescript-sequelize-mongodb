@@ -1,6 +1,15 @@
-import { Model, DataTypes, BelongsTo, Sequelize } from 'sequelize';
+import {
+  Model,
+  DataTypes,
+  BelongsTo,
+  Sequelize,
+  BelongsToMany,
+  HasManyGetAssociationsMixin,
+} from 'sequelize';
 import { uuid, generateBcryptHash } from '@helpers/hash';
 import File from '@models/File';
+import Role from '@models/Role';
+import Permission from '@models/Permission';
 
 class User extends Model {
   public id!: string;
@@ -10,6 +19,9 @@ class User extends Model {
   public status?: string;
   public forget?: string | null;
   public avatar_id?: string;
+  public avatar?: File;
+  public roles?: Role[];
+  public permissions?: Permission[];
 
   // timestamps!
   public confirmedAt?: Date | null;
@@ -19,19 +31,23 @@ class User extends Model {
 
   public static associations: {
     avatar: BelongsTo<User, File>;
+    roles: BelongsToMany<User, Role>;
+    permissions: BelongsToMany<User, Permission>;
   };
+
+  public getRoles!: HasManyGetAssociationsMixin<Role>;
 
   static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
-          type: DataTypes.UUID,
-          primaryKey: true,
+          type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: uuid(),
+          autoIncrement: true,
+          primaryKey: true,
         },
         avatar_id: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           references: { model: 'files', key: 'id' },
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
@@ -84,6 +100,20 @@ class User extends Model {
 
   static associate(models: any) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+
+    this.belongsToMany(models.Role, {
+      foreignKey: 'user_id',
+      otherKey: 'role_id',
+      through: 'user_roles',
+      as: 'roles',
+    });
+
+    this.belongsToMany(models.Permission, {
+      foreignKey: 'user_id',
+      otherKey: 'permission_id',
+      through: 'user_permissions',
+      as: 'permissions',
+    });
   }
 }
 

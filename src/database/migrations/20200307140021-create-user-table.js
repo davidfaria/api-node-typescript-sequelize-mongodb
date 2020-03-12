@@ -16,44 +16,45 @@ module.exports = {
       */
     return queryInterface.createTable('users', {
       id: {
-        type: Sequelize.DataTypes.UUID,
-        primaryKey: true,
+        type: Sequelize.INTEGER,
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
       },
       avatar_id: {
-        type: Sequelize.DataTypes.UUID,
+        type: Sequelize.INTEGER,
         references: { model: 'files', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
       name: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       email: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       password: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       status: {
-        type: Sequelize.DataTypes.ENUM('registred', 'confirmed', 'canceled'),
+        type: Sequelize.ENUM('registred', 'confirmed', 'canceled'),
         allowNull: false,
         defaultValue: 'registred',
       },
       forget: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       forget_at: {
-        type: Sequelize.DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       confirmed_at: {
-        type: Sequelize.DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       created_at: {

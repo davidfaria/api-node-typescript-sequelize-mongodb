@@ -1,16 +1,16 @@
 import { Router } from 'express';
-import multer from 'multer';
+// import multer from 'multer';
 
 /**
  *  Config
  */
-import multerConfig from '@config/multer';
+// import multerConfig from '@config/multer';
 
 /**
  *  Middleware
  */
 import authMiddleware from '@middlewares/auth';
-import aclCan from '@middlewares/acl/can';
+import { Acl } from '@middlewares/acl';
 
 /**
  * Controller
@@ -21,6 +21,8 @@ import ConfirmEmailController from '@controllers/ConfirmEmailController';
 import ForgetController from '@controllers/ForgetController';
 import UserController from '@controllers/UserController';
 import FileController from '@controllers/FileController';
+
+import RoleController from '@controllers/RoleController';
 
 /**
  * Validator
@@ -36,7 +38,7 @@ import UserUpdateValidator from '@validators/UserUpdate';
  *  Setup Config
  */
 const routes = Router();
-const upload = multer(multerConfig);
+// const upload = multer(multerConfig);
 
 routes.get('/', (req, res) => {
   return res.json({
@@ -58,11 +60,46 @@ routes.put(
 );
 
 routes.use(authMiddleware);
-routes.get('/users', aclCan('users_list'), UserController.index);
-routes.post('/users', UserStoreValidator, UserController.store);
-routes.put('/users/:id', UserUpdateValidator, UserController.update);
-routes.delete('/users/:id', UserController.destroy);
 
-routes.post('/files', upload.single('file'), FileController.store);
+// routes.get('/users', Is('administrador'), UserController.index);
+// routes.get('/users', Can(['users_list']), UserController.index);
+
+routes.get(
+  '/users',
+  Acl({
+    permissions: ['users_list'],
+  }),
+  UserController.index,
+);
+
+routes.post(
+  '/users',
+  Acl({
+    permissions: ['users_create'],
+  }),
+  UserStoreValidator,
+  UserController.store,
+);
+
+routes.put(
+  '/users/:id([0-9]+)',
+  Acl({
+    permissions: ['users_update'],
+  }),
+  UserUpdateValidator,
+  UserController.update,
+);
+
+routes.delete(
+  '/users/:id([0-9]+)',
+  Acl({
+    permissions: ['users_delete'],
+  }),
+  UserController.destroy,
+);
+
+routes.get('/roles', RoleController.index);
+
+// routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
-import Queue from '@lib/Queue';
+// import Queue from '@lib/Queue';
 import Mail from '@schemas/Mail';
 import User from '@models/User';
-import ForgetPasswordMail from '@jobs/ForgetPasswordMail';
+// import ForgetPasswordMail from '@jobs/ForgetPasswordMail';
 import { generateBcryptHash, randomHash } from '@helpers/hash';
 import { generateJwtToken } from '@helpers/jwt';
 
@@ -32,9 +32,9 @@ class ForgetlController {
 
     // console.log('dataMail', { name: user.name, email, link });
 
-    Queue.add(ForgetPasswordMail.key, {
-      dataMail: { name: user.name, email, link },
-    });
+    // Queue.add(ForgetPasswordMail.key, {
+    //   dataMail: { name: user.name, email, link },
+    // });
 
     Mail.create({
       flag: 'ForgetPasswordMail',

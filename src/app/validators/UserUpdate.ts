@@ -1,12 +1,15 @@
+import { Request, Response, NextFunction } from 'express';
 import * as Yup from 'yup';
 
-export default async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       password: Yup.string(),
-      password_confirmation: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field,
+      password_confirmation: Yup.string().when(
+        'password',
+        (password: string, field: any) =>
+          password ? field.required().oneOf([Yup.ref('password')]) : field,
       ),
       avatar_id: Yup.string(),
     });

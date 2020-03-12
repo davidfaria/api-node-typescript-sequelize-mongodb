@@ -1,26 +1,14 @@
-import nodemailer from 'nodemailer';
+import nodemailer, { Transport } from 'nodemailer';
 import { resolve } from 'path';
 import exphbs from 'express-handlebars';
 import nodemailerhbs from 'nodemailer-express-handlebars';
 import mailConfig from '@config/mail';
 
-// interface IMailConfig {
-//   host: string;
-//   port: number;
-//   secure: boolean;
-//   auth: {
-//     user: string;
-//     pass: string;
-//   };
-//   default: {
-//     from: string;
-//   };
-// }
-
 class Mail {
-  private transporter: any;
+  private transporter: Transport;
   constructor() {
     const { host, port, secure, auth } = mailConfig;
+
     this.transporter = nodemailer.createTransport({
       host,
       port,
@@ -44,11 +32,11 @@ class Mail {
         }),
         viewPath,
         extName: '.hbs',
-      })
+      }),
     );
   }
 
-  sendMail(message) {
+  sendMail(message: any) {
     // console.log({
     //   ...mailConfig.default,
     //   ...message

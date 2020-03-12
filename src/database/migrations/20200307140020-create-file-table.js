@@ -10,17 +10,24 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
       */
     return queryInterface.createTable('files', {
+      // id: {
+      //   type: Sequelize.DataTypes.UUID,
+      //   primaryKey: true,
+      //   allowNull: false,
+      //   defaultValue: Sequelize.DataTypes.UUIDV4,
+      // },
       id: {
-        type: Sequelize.DataTypes.UUID,
-        primaryKey: true,
+        type: Sequelize.INTEGER,
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
       },
       name: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       path: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       created_at: {

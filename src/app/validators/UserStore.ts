@@ -1,6 +1,7 @@
+import { Request, Response, NextFunction } from 'express';
 import * as Yup from 'yup';
 
-export default async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const schema = Yup.object().shape({
       name: Yup.string().required(),

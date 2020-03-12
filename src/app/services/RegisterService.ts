@@ -1,5 +1,5 @@
-import Queue from '@lib/Queue';
-import RegistrationMail from '@jobs/RegistrationMail';
+// import Queue from '@lib/Queue';
+// import RegistrationMail from '@jobs/RegistrationMail';
 import Mail from '@schemas/Mail';
 import User from '@models/User';
 
@@ -39,7 +39,7 @@ class RegisterService {
     /**
      *  Adiciona na fila o email de confirmação de cadastro
      */
-    Queue.add(RegistrationMail.key, { dataMail: { name, email, link } });
+    // Queue.add(RegistrationMail.key, { dataMail: { name, email, link } });
 
     /**
      *  Registr log send mail noSql (MONGODB)
