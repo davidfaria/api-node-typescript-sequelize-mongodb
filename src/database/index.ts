@@ -30,7 +30,10 @@ class Database {
   }
 
   private mongo(): void {
-    // mongoose.connect(<string>process.env.MONGO_URL, {
+    console.log('MONGO_URL', process.env.MONGO_URL);
+    const MONGO_URL: string = <any>process.env.MONGO_URL;
+
+    // mongoose.connect(MONGO_URL, {
     //   useNewUrlParser: true,
     //   useFindAndModify: true,
     //   useUnifiedTopology: true,

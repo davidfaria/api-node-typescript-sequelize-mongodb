@@ -3,10 +3,10 @@ import path from 'path';
 import express, { Application } from 'express';
 import helmet from 'helmet';
 import cors from '@middlewares/cors';
+import morgan from '@middlewares/morgan';
 import rateLimit from '@middlewares/rateLimit';
 
 import ROUTES from '@app/routes';
-
 import database from '@app/database';
 
 class App {
@@ -23,6 +23,7 @@ class App {
     this.server.use(helmet());
     this.server.use(express.json());
     this.server.use(cors);
+    this.server.use(morgan);
     this.server.use(rateLimit);
 
     this.server.use(
