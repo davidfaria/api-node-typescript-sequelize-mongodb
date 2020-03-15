@@ -28,6 +28,7 @@
       "@middlewares/*": ["app/middlewares/*"],
       "@models/*": ["app/models/*"],
       "@repositories/*": ["app/repositories/*"],
+      "@routes/*": ["app/routes/*"],
       "@schemas/*": ["app/schemas/*"],
       "@services/*": ["app/services/*"],
       "@validators/*": ["app/validators/*"]

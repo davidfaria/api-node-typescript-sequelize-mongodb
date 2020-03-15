@@ -6,7 +6,7 @@ import {
   BelongsToMany,
   HasManyGetAssociationsMixin,
 } from 'sequelize';
-import { uuid, generateBcryptHash } from '@helpers/hash';
+import { generateBcryptHash } from '@helpers/hash';
 import File from '@models/File';
 import Role from '@models/Role';
 import Permission from '@models/Permission';

@@ -1,15 +1,17 @@
+import { promisify } from 'util';
 import jwt from 'jsonwebtoken';
 import authConfig from '@config/auth';
 
 const generateJwtToken = ({ ...data }: object) => {
-  const token = jwt.sign({ ...data }, 'ASHDLKAKLHDLKAHDAHLDA', {
+  const token = jwt.sign({ ...data }, authConfig.secret, {
     expiresIn: authConfig.expiresIn,
   });
-  // const token = jwt.sign({ ...data }, authConfig.secret, {
-  //   expiresIn: authConfig.expiresIn,
-  // });
 
   return token;
 };
 
-export { generateJwtToken };
+const jwtVerify = async (token: string): Promise<any> => {
+  const decoded = await promisify(jwt.verify)(token, authConfig.secret);
+  return decoded;
+};
+export { generateJwtToken, jwtVerify };

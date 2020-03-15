@@ -1,8 +1,7 @@
 'use strict';
-import bcrypt from 'bcryptjs';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize) => {
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -14,12 +13,23 @@ module.exports = {
       }], {});
       */
     return queryInterface.bulkInsert(
-      'users',
+      'user_stores',
       [
         {
-          name: 'Administrador',
-          email: 'admin@larawork.com.br',
-          password: await bcrypt.hash('123456', 8),
+          user_id: 1 /** Administrador */,
+          store_id: 1 /** Store larawork */,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          user_id: 1 /** Administrador */,
+          store_id: 2 /** Store Garota Vip */,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          user_id: 2 /** Gerente */,
+          store_id: 2 /** Store Garota Vip */,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -36,6 +46,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
       */
-    return queryInterface.bulkDelete('users', null, {});
+    return queryInterface.bulkDelete('stores', null, {});
   },
 };

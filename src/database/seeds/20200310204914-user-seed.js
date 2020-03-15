@@ -1,10 +1,7 @@
 'use strict';
+const bcrypt = require('bcryptjs');
+
 module.exports = {
-  /**
-   * @function
-   * @param {import('sequelize').QueryInterface} queryInterface
-   * @param {import('sequelize')} Sequelize
-   */
   up: async (queryInterface, Sequelize) => {
     /*
       Add altering commands here.
@@ -16,19 +13,20 @@ module.exports = {
         isBetaMember: false
       }], {});
       */
-
     return queryInterface.bulkInsert(
-      'user_roles',
+      'users',
       [
         {
-          user_id: 1 /** Administrador */,
-          role_id: 1 /** Administrador */,
+          name: 'Administrador',
+          email: 'admin@larawork.com.br',
+          password: await bcrypt.hash('123456', 8),
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          user_id: 1 /** Administrador */,
-          role_id: 2 /** Gerente */,
+          name: 'David Faria',
+          email: 'davidfaria89@gmail.com',
+          password: await bcrypt.hash('123456', 8),
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -45,6 +43,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
       */
-    return queryInterface.bulkDelete('user_roles', null, {});
+    return queryInterface.bulkDelete('users', null, {});
   },
 };

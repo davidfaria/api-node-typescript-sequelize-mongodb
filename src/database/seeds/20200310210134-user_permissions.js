@@ -24,7 +24,7 @@ module.exports = {
     // );
     // console.log('PERMISSOES', result, metadata);
 
-    const permissions = result.map(current => {
+    const permissionsAdmin = result.map(current => {
       return {
         user_id: 1 /** Administrador */,
         permission_id: current.id,
@@ -33,7 +33,20 @@ module.exports = {
       };
     });
 
-    return queryInterface.bulkInsert('user_permissions', permissions, {});
+    const permissionsGerente = result.map(current => {
+      return {
+        user_id: 2 /** Gerente */,
+        permission_id: current.id,
+        created_at: new Date(),
+        updated_at: new Date(),
+      };
+    });
+
+    return queryInterface.bulkInsert(
+      'user_permissions',
+      [...permissionsAdmin, ...permissionsGerente],
+      {},
+    );
   },
 
   down: (queryInterface, Sequelize) => {
