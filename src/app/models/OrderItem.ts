@@ -1,6 +1,6 @@
 import { Model, Sequelize, DataTypes } from 'sequelize';
 
-class Product extends Model {
+class OrderItem extends Model {
   static initialize(sequelize: Sequelize) {
     this.init(
       {
@@ -17,64 +17,48 @@ class Product extends Model {
           onDelete: 'CASCADE',
           allowNull: false,
         },
-        category_id: {
+        order_id: {
           type: DataTypes.INTEGER,
-          references: { model: 'categories', key: 'id' },
+          references: { model: 'orders', key: 'id' },
           onUpdate: 'CASCADE',
-          onDelete: 'SET NULL',
-          allowNull: true,
-        },
-        image_id: {
-          type: DataTypes.INTEGER,
-          references: { model: 'files', key: 'id' },
-          onUpdate: 'CASCADE',
-          onDelete: 'SET NULL',
-          allowNull: true,
-        },
-        name: {
-          type: DataTypes.STRING,
+          onDelete: 'RESTRICT',
           allowNull: false,
         },
-        reference: {
-          type: DataTypes.STRING,
-          allowNull: true,
+        product_id: {
+          type: DataTypes.INTEGER,
+          references: { model: 'products', key: 'id' },
+          onUpdate: 'CASCADE',
+          onDelete: 'RESTRICT',
+          allowNull: false,
+        },
+        amount: {
+          type: DataTypes.DECIMAL(10, 2),
+          allowNull: false,
         },
         price: {
           type: DataTypes.DECIMAL(10, 2),
           allowNull: false,
+          default: 0.0,
         },
-        amount: {
-          type: DataTypes.INTEGER,
+        discount: {
+          type: DataTypes.DECIMAL(10, 2),
           allowNull: false,
+          default: 0.0,
         },
-        service: {
-          type: DataTypes.BOOLEAN,
+        total: {
+          type: DataTypes.DECIMAL(10, 2),
           allowNull: false,
-        },
-        status: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false,
+          default: 0.0,
         },
       },
       {
-        tableName: 'products',
+        tableName: 'order_itens',
         sequelize,
       },
     );
 
     return this;
   }
-
-  static associate(models: any) {
-    this.belongsTo(models.Category, {
-      foreignKey: 'category_id',
-      as: 'category',
-    });
-    this.belongsTo(models.File, {
-      foreignKey: 'image_id',
-      as: 'image',
-    });
-  }
 }
 
-export default Product;
+export default OrderItem;

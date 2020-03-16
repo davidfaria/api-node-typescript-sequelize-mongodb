@@ -2,9 +2,11 @@ import { Request, Response } from 'express';
 
 import User from '@models/User';
 // import File from '@models/File';
-// import Role from '@models/Role';
+import Role from '@models/Role';
 import { compareBcryptHash, generateBcryptHash } from '@helpers/hash';
 import { generateJwtToken } from '@helpers/jwt';
+import UserStore from '@models/UserStore';
+import Store from '@models/Store';
 
 class SessionController {
   async store(req: Request, res: Response) {
@@ -18,14 +20,24 @@ class SessionController {
           attributes: ['id', 'path', 'url'],
         },
         {
+          association: 'stores',
+          as: 'stores',
+          through: { attributes: [] },
+          attributes: ['id', 'name'],
+          where: { status: true },
+          order: [['id', 'asc']],
+        },
+        {
           association: 'roles',
           through: { attributes: [] },
           attributes: ['id', 'slug'],
+          order: [['id', 'asc']],
         },
         {
           association: 'permissions',
           through: { attributes: [] },
           attributes: ['id', 'slug'],
+          order: [['id', 'asc']],
         },
       ],
       // include: [
@@ -52,7 +64,7 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, avatar, roles, permissions } = user;
+    const { id, name, avatar, stores, roles, permissions } = user;
 
     return res.json({
       user: {
@@ -60,6 +72,7 @@ class SessionController {
         name,
         email,
         avatar,
+        stores,
         roles,
         permissions,
       },

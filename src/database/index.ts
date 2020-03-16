@@ -14,6 +14,10 @@ import Permission from '@models/Permission';
 import UserPermission from '@models/UserPermission';
 import Category from '@models/Category';
 import Product from '@models/Product';
+import Customer from '@models/Customer';
+import Order from '@models/Order';
+import OrderItem from '@models/OrderItem';
+import OrderPayment from '@models/OrderPayment';
 
 class Database {
   public connection: any;
@@ -27,6 +31,10 @@ class Database {
     UserPermission,
     Category,
     Product,
+    Customer,
+    Order,
+    OrderItem,
+    OrderPayment,
   ];
 
   constructor() {
@@ -57,4 +65,4 @@ class Database {
   }
 }
 
-export default Database;
+export default new Database();

@@ -1,6 +1,6 @@
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Model, Sequelize, DataTypes } from 'sequelize';
 
-class Store extends Model {
+class Customer extends Model {
   static initialize(sequelize: Sequelize) {
     this.init(
       {
@@ -10,7 +10,14 @@ class Store extends Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        logo_id: {
+        store_id: {
+          type: DataTypes.INTEGER,
+          references: { model: 'stores', key: 'id' },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+          allowNull: false,
+        },
+        foto_id: {
           type: DataTypes.INTEGER,
           references: { model: 'files', key: 'id' },
           onUpdate: 'CASCADE',
@@ -20,6 +27,19 @@ class Store extends Model {
         name: {
           type: DataTypes.STRING,
           allowNull: false,
+        },
+        genre: {
+          type: DataTypes.ENUM('Masculino', 'Feminino', 'Outros'),
+          allowNull: false,
+          defaultValue: 'Outros',
+        },
+        birthdate: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        email: {
+          type: DataTypes.STRING,
+          allowNull: true,
         },
         type_document: {
           type: DataTypes.ENUM('PJ', 'PF'),
@@ -34,15 +54,15 @@ class Store extends Model {
           type: DataTypes.STRING,
           allowNull: true,
         },
+        rg: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
         phone: {
           type: DataTypes.STRING,
           allowNull: true,
         },
         cell_phone: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        email: {
           type: DataTypes.STRING,
           allowNull: true,
         },
@@ -85,17 +105,13 @@ class Store extends Model {
         },
       },
       {
-        tableName: 'stores',
+        tableName: 'customers',
         sequelize,
       },
     );
 
     return this;
   }
-
-  static associate(models: any) {
-    this.belongsTo(models.File, { foreignKey: 'logo_id', as: 'logo' });
-  }
 }
 
-export default Store;
+export default Customer;

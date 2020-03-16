@@ -38,6 +38,16 @@ routes.post(
   ProductController.store,
 );
 
+routes.get(
+  '/products/:id',
+  [
+    Acl({
+      permissions: ['products_update'],
+    }),
+  ],
+  ProductController.show,
+);
+
 routes.put(
   '/products/:id',
   [

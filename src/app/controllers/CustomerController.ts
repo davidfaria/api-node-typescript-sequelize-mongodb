@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
-import Product from '@models/Product';
+import Customer from '@models/Customer';
 
-class ProductController {
+class CustomerController {
   async index(req: Request, res: Response) {
     const store_id = req.storeId;
     const q = req.query.q || '';
     const page = parseInt(req.query.page || 1, 10);
     const perPage = parseInt(req.query.perPage || 7, 10);
 
-    const products = await Product.findAndCountAll({
+    const customers = await Customer.findAndCountAll({
       order: ['name'],
       where: {
         store_id,
@@ -21,37 +21,15 @@ class ProductController {
       offset: (page - 1) * perPage,
     });
 
-    const lastPage = Math.ceil(products.count / perPage);
+    const lastPage = Math.ceil(customers.count / perPage);
 
     return res.json({
-      total: products.count,
+      total: customers.count,
       perPage,
       lastPage,
       page,
-      data: products.rows,
+      data: customers.rows,
     });
-  }
-
-  async show(req: Request, res: Response) {
-    const store_id = req.storeId;
-
-    const product = await Product.findOne({
-      where: {
-        store_id,
-      },
-      include: [
-        {
-          association: 'category',
-          attributes: ['id', 'name'],
-        },
-        {
-          association: 'image',
-          attributes: ['id', 'name', 'url'],
-        },
-      ],
-    });
-
-    return res.json(product);
   }
 
   async store(req: Request, res: Response) {
@@ -59,7 +37,7 @@ class ProductController {
       const store_id = req.storeId;
       const { name, status, reference, price, amount, service } = req.body;
 
-      const product = await Product.create({
+      const customer = await Customer.create({
         name,
         store_id,
         status,
@@ -69,7 +47,7 @@ class ProductController {
         service,
       });
 
-      return res.status(201).json(product);
+      return res.status(201).json(customer);
     } catch (error) {
       return res.sendError(error, 500);
     }
@@ -79,7 +57,7 @@ class ProductController {
     const { id } = req.params;
     const { name, status } = req.body;
 
-    const [rowsEffect, product] = await Product.update(
+    const [rowsEffect, customer] = await Customer.update(
       {
         name,
         status,
@@ -93,13 +71,13 @@ class ProductController {
       },
     );
 
-    return res.status(200).json(product);
+    return res.status(200).json(customer);
   }
 
   async delete(req: Request, res: Response) {
     const { id } = req.params;
 
-    await Product.destroy({
+    await Customer.destroy({
       where: { id },
     });
 
@@ -107,4 +85,4 @@ class ProductController {
   }
 }
 
-export default new ProductController();
+export default new CustomerController();

@@ -9,6 +9,7 @@ import {
 import { generateBcryptHash } from '@helpers/hash';
 import File from '@models/File';
 import Role from '@models/Role';
+import Store from '@models/Store';
 import Permission from '@models/Permission';
 
 class User extends Model {
@@ -22,6 +23,7 @@ class User extends Model {
   public avatar?: File;
   public roles?: Role[];
   public permissions?: Permission[];
+  public stores?: Store[];
 
   // timestamps!
   public confirmedAt?: Date | null;
@@ -33,6 +35,7 @@ class User extends Model {
     avatar: BelongsTo<User, File>;
     roles: BelongsToMany<User, Role>;
     permissions: BelongsToMany<User, Permission>;
+    stores: BelongsToMany<User, Store>;
   };
 
   public getRoles!: HasManyGetAssociationsMixin<Role>;
@@ -100,6 +103,13 @@ class User extends Model {
 
   static associate(models: any) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+
+    this.belongsToMany(models.Store, {
+      foreignKey: 'user_id',
+      otherKey: 'store_id',
+      through: 'user_stores',
+      as: 'stores',
+    });
 
     this.belongsToMany(models.Role, {
       foreignKey: 'user_id',

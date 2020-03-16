@@ -2,6 +2,7 @@ import '@app/bootstrap';
 import { Op } from 'sequelize';
 import req from 'supertest';
 import app from '@app/app';
+import { truncate } from '@database/util/truncate';
 import { btoa, randomHash, compareBcryptHash } from '@helpers/hash';
 import { generateJwtToken } from '@helpers/jwt';
 
@@ -25,14 +26,16 @@ describe('Suit of test auth', () => {
   });
 
   beforeEach(async () => {
-    await User.destroy({
-      where: {
-        email: {
-          [Op.ne]: 'admin@larawork.com.br',
-        },
-      },
-      // truncate: true,
-    });
+    await truncate();
+
+    // await User.destroy({
+    //   where: {
+    //     email: {
+    //       [Op.ne]: 'admin@larawork.com.br',
+    //     },
+    //   },
+    //   // truncate: true,
+    // });
     // userAuth = await User.create({
     //   name: 'User default',
     //   email: `admin@larawork.com.br`,

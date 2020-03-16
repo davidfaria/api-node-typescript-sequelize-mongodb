@@ -12,9 +12,9 @@ import rateLimit from '@middlewares/rateLimit';
 import sendError from '@middlewares/sendError';
 
 /**
- * Database
+ * Init Database
  */
-import database from '@app/database';
+import '@app/database';
 
 /**
  *  Routes
@@ -27,7 +27,6 @@ class App {
   constructor() {
     this.server = express();
     this.middleware();
-    this.database();
     this.routes();
   }
 
@@ -43,10 +42,6 @@ class App {
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')),
     );
-  }
-
-  private database(): void {
-    new database();
   }
 
   private routes() {

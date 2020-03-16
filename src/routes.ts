@@ -13,6 +13,7 @@ import authRoutes from '@routes/auth';
 import usersRoutes from '@routes/users';
 import categoriesRoutes from '@routes/categories';
 import productsRoutes from '@routes/products';
+import customersRoutes from '@routes/customers';
 
 // Administrador
 import rolesRoutes from '@routes/roles';
@@ -39,6 +40,7 @@ routes.use([authMiddleware, storeMiddleware]);
 routes.use(usersRoutes);
 routes.use(categoriesRoutes);
 routes.use(productsRoutes);
+routes.use(customersRoutes);
 
 /**
  * Admin routes
