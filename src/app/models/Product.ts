@@ -43,6 +43,10 @@ class Product extends Model {
           type: DataTypes.DECIMAL(10, 2),
           allowNull: false,
         },
+        price_cost: {
+          type: DataTypes.DECIMAL(10, 2),
+          allowNull: false,
+        },
         amount: {
           type: DataTypes.INTEGER,
           allowNull: false,

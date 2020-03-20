@@ -49,15 +49,20 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: true,
           },
+          amount: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            default: 0,
+          },
           price: {
             type: Sequelize.DECIMAL(10, 2),
             allowNull: false,
             default: 0.0,
           },
-          amount: {
-            type: Sequelize.INTEGER,
+          price_cost: {
+            type: Sequelize.DECIMAL(10, 2),
             allowNull: false,
-            default: 0,
+            default: 0.0,
           },
           service: {
             type: Sequelize.BOOLEAN,
