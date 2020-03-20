@@ -12,5 +12,5 @@ export const databaseConfig: Options = {
     underscored: true,
   },
   storage: './__tests__/database.sqlite',
-  logging: true,
+  logging: false,
 };

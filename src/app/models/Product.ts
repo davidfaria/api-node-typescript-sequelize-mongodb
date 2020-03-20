@@ -23,6 +23,7 @@ class Product extends Model {
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
           allowNull: true,
+          defaultValue: null,
         },
         image_id: {
           type: DataTypes.INTEGER,
@@ -30,6 +31,7 @@ class Product extends Model {
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
           allowNull: true,
+          defaultValue: null,
         },
         name: {
           type: DataTypes.STRING,

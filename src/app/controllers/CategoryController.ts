@@ -13,6 +13,13 @@ class CategoryController {
     const limit: number = perPage;
     const offset: number = Number(page - 1) * perPage;
 
+    console.log('Parms', {
+      store_id,
+      q,
+      page,
+      perPage,
+    });
+
     const categories = await Category.findAndCountAll({
       order: ['name'],
       where: {

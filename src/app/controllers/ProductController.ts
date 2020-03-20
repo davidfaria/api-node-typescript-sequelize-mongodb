@@ -1,3 +1,4 @@
+import { req } from 'supertest';
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
 import Product from '@models/Product';
@@ -57,14 +58,26 @@ class ProductController {
   async store(req: Request, res: Response) {
     try {
       const store_id = req.storeId;
-      const { name, status, reference, price, amount, service } = req.body;
+      const {
+        name,
+        status,
+        reference,
+        price,
+        price_cost,
+        amount,
+        service,
+      } = req.body;
+
+      const category_id = req.body.category_id || null;
 
       const product = await Product.create({
         name,
+        category_id,
         store_id,
         status,
         reference,
         price,
+        price_cost,
         amount,
         service,
       });

@@ -33,6 +33,7 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'SET NULL',
             allowNull: true,
+            defaultValue: null,
           },
           image_id: {
             type: Sequelize.INTEGER,
@@ -40,6 +41,7 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'SET NULL',
             allowNull: true,
+            defaultValue: null,
           },
           name: {
             type: Sequelize.STRING,
