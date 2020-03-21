@@ -4,6 +4,7 @@
     "module": "commonjs",
     "allowJs": true,
     "outDir": "./dist",
+    "sourceMap": true,
     "strict": true,
     "noImplicitAny": true,
     "strictPropertyInitialization": true,

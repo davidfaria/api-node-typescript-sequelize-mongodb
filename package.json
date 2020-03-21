@@ -9,7 +9,7 @@
     "posttest": "NODE_ENV=test yarn sequelize-ts db:migrate:undo:all ",
     "test": "NODE_ENV=test jest --verbose=true --detectOpenHandles --runInBand --forceExit",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --no-notify src/server.ts",
-    "dev:debug": "ts-node-dev -r tsconfig-paths/register --inspect --respawn --no-notify src/server.ts",
+    "dev:debug": "ts-node-dev --inspect -r tsconfig-paths/register  --respawn --no-notify src/server.ts",
     "queue": "ts-node-dev -r tsconfig-paths/register  --inspect --respawn --no-notify src/queue.ts",
     "build": "tsc"
   },
