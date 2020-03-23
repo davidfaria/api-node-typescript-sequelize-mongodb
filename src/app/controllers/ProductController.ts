@@ -1,4 +1,3 @@
-import { req } from 'supertest';
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
 import Product from '@models/Product';
@@ -14,9 +13,18 @@ class ProductController {
       order: ['name'],
       where: {
         store_id,
-        name: {
-          [Op.iLike]: `%${q}%`,
-        },
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${q}%`,
+            },
+          },
+          {
+            reference: {
+              [Op.iLike]: `%${q}%`,
+            },
+          },
+        ],
       },
       limit: perPage,
       offset: (page - 1) * perPage,
@@ -43,6 +51,10 @@ class ProductController {
       include: [
         {
           association: 'category',
+          attributes: ['id', 'name'],
+        },
+        {
+          association: 'store',
           attributes: ['id', 'name'],
         },
         {

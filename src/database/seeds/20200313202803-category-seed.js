@@ -17,6 +17,20 @@ module.exports = {
       [
         {
           store_id: 1 /** Store Larawork */,
+          name: 'Celulares',
+          status: true,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          store_id: 1 /** Store Larawork */,
+          name: 'Notebooks',
+          status: true,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          store_id: 1 /** Store Larawork */,
           name: 'Adulto masculino',
           status: true,
           created_at: new Date(),

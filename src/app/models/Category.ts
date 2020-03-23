@@ -43,6 +43,13 @@ class Category extends Model {
 
     return this;
   }
+
+  static associate(models: any) {
+    this.hasMany(models.Product, {
+      foreignKey: 'category_id',
+      as: 'products',
+    });
+  }
 }
 
 export default Category;

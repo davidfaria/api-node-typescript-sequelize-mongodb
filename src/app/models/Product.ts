@@ -1,6 +1,14 @@
-import { Model, Sequelize, DataTypes } from 'sequelize';
-
+import { Model, Sequelize, DataTypes, BelongsTo } from 'sequelize';
+import Category from '@models/Category';
+import Store from '@models/Store';
+import File from '@models/File';
 class Product extends Model {
+  public static associations: {
+    category: BelongsTo<Product, Category>;
+    store: BelongsTo<Product, Store>;
+    image: BelongsTo<Product, File>;
+  };
+
   static initialize(sequelize: Sequelize) {
     this.init(
       {
@@ -74,10 +82,19 @@ class Product extends Model {
   static associate(models: any) {
     this.belongsTo(models.Category, {
       foreignKey: 'category_id',
+      targetKey: 'id',
       as: 'category',
     });
+
+    this.belongsTo(models.Store, {
+      foreignKey: 'store_id',
+      targetKey: 'id',
+      as: 'store',
+    });
+
     this.belongsTo(models.File, {
       foreignKey: 'image_id',
+      targetKey: 'id',
       as: 'image',
     });
   }
